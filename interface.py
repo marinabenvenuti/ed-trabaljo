@@ -82,3 +82,15 @@ class Interface():
             for livro in livros:
                 print("{:<5} {:<25} {:<25} {:<15} R${:<10.2f}".format(livro.id, livro.nome, livro.autor, livro.genero, livro.preco))
             print("="*80)
+    
+    def opcoes_exclusao(self):
+        print("Opções de exclusão")
+        print("1 - Excluir por ID")
+        print("2 - Excluir por nome")
+        return input("Escolha uma opção de exclusão: ")
+
+    def obter_id_livro(self):
+        return int(input("Digite o ID do livro a ser excluído: "))
+
+    def obter_nome_livro(self):
+        return input("Digite o nome do livro a ser excluído: ")

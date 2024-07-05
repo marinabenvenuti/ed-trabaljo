@@ -10,17 +10,6 @@ class ListaInvertida():
         self.__precos = {'30': [], '50': [], '100': [], '200': [], 'acima': []}
         self.__livros = []
         self.__interface = Interface()
-
-    def teste(self):
-        for autores in self.__autores:
-            print(autores.item)
-        for generos in self.__generos:
-            print(generos.item)
-        print(self.__precos['30'])
-        print(self.__precos['50'])
-        print(self.__precos['100'])
-        print(self.__precos['200'])
-        print(self.__precos['acima'])
     
     def inicializa_sistema(self):
         exec = True
@@ -35,7 +24,10 @@ class ListaInvertida():
                 self.busca_geral()
 
             elif opcao == '3':
-                self.teste()
+                if self.__livros == []:
+                    self.__interface.print_basico('Sem livros cadastrados')
+                else:
+                    self.excluir_livro()
 
             elif opcao == '4':
                 if self.__livros == []:
@@ -231,6 +223,49 @@ class ListaInvertida():
             return self.__precos['200']
         if preco == '5':
             return self.__precos['acima']
+        
+    def excluir_livro(self):
+        opcao_exclusao = self.__interface.opcoes_exclusao()
+        if opcao_exclusao == '1':
+            id_livro = self.__interface.obter_id_livro()
+            livro_para_excluir = None
+            for livro in self.__livros:
+                if livro.id == id_livro:
+                    livro_para_excluir = livro
+                    break
+            if livro_para_excluir:
+                self.__livros.remove(livro_para_excluir)
+                self.atualizar_estruturas_apos_exclusao(livro_para_excluir)
+                self.__interface.print_basico(f'Livro {livro_para_excluir.nome} excluído com sucesso')
+            else:
+                self.__interface.print_basico('Livro não encontrado')
+        elif opcao_exclusao == '2':
+            nome_livro = self.__interface.obter_nome_livro()
+            livros_para_excluir = [livro for livro in self.__livros if livro.nome == nome_livro]
+            if livros_para_excluir:
+                for livro in livros_para_excluir:
+                    self.__livros.remove(livro)
+                    self.atualizar_estruturas_apos_exclusao(livro)
+                self.__interface.print_basico(f'{len(livros_para_excluir)} livro(s) com nome "{nome_livro}" excluído(s) com sucesso')
+            else:
+                self.__interface.print_basico('Livro não encontrado')
+
+    def atualizar_estruturas_apos_exclusao(self, livro):
+        for autor in self.__autores:
+            if livro.id in autor.ids:
+                autor.ids.remove(livro.id)
+                if not autor.ids:
+                    self.__autores.remove(autor)
+
+        for genero in self.__generos:
+            if livro.id in genero.ids:
+                genero.ids.remove(livro.id)
+                if not genero.ids:
+                    self.__generos.remove(genero)
+
+        for intervalo, ids in self.__precos.items():
+            if livro.id in ids:
+                ids.remove(livro.id)
         
     def carga_de_dados(self):
         livros_exemplo = [
