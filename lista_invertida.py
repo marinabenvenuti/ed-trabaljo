@@ -174,12 +174,11 @@ class ListaInvertida():
                     self.__interface.print_basico('O autor e/ou o intervalo de preço informado não está cadastrado. Tente novamente')
                 else:
                     self.__interface.print_basico('Livro(s) com o autor e intervalo de preço informado')
-                    encontrados = [livro for livro in self.__livros if livro.id in result_autor and livro in result_preco]
-                    if encontrados:
-                        for livro in encontrados:
-                            self.__interface.print_livro(livro)
-                    else:
-                        self.__interface.print_basico('Nenhum livro encontrado com o autor e intervalo de preço informado')
+                    for livro in self.__livros:
+                        for id_a in result_autor:
+                            for id_p in result_preco:
+                                if livro.id==id_a and livro.id==id_p:
+                                    self.__interface.print_livro(livro)
 
             elif opcao_busca == '7':
                 result_genero = self.busca_genero()
@@ -188,14 +187,14 @@ class ListaInvertida():
                     self.__interface.print_basico('O gênero e/ou o intervalo de preço informado não está cadastrado. Tente novamente')
                 else:
                     self.__interface.print_basico('Livro(s) com o gênero e intervalo de preço informado')
-                    encontrados = [livro for livro in self.__livros if livro.id in result_genero and livro in result_preco]
-                    if encontrados:
-                        for livro in encontrados:
-                            self.__interface.print_livro(livro)
-                    else:
-                        self.__interface.print_basico('Nenhum livro encontrado com o gênero e intervalo de preço informado')
+                    for livro in self.__livros:
+                        for id_g in result_genero:
+                            for id_p in result_preco:
+                                if livro.id==id_g and livro.id==id_p:
+                                    self.__interface.print_livro(livro)
+                    
 
-            elif opcao_busca == '8':
+            elif opcao_busca == '0':
                 break
 
     def livro_por_id(self, result):
@@ -216,6 +215,7 @@ class ListaInvertida():
         genero = self.__interface.busca_basica('gênero')
         for generos in self.__generos:
             if genero == generos.item:
+                print(generos.ids)
                 return generos.ids
         return 'Gênero não encontrado'
 
