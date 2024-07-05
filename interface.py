@@ -5,8 +5,9 @@ class Interface():
     def tela_inicial(self):
         print()
         print('Bem vindo à livraria :)')
-        print()
+        print('---------------------------------------')
         print('Escolha uma opção abaixo: ')
+        print('---------------------------------------')
         print('1 - Inclusão de livro')
         print('2 - Busca de livro')
         print('3 - Exclusão de livro')
@@ -29,6 +30,7 @@ class Interface():
     def opcoes_busca(self):
         print()
         print('Escolha uma opção de busca: ')
+        print('----------------------------------')
         print('1 - Buscar por nome')
         print('2 - Buscar por autor')
         print('3 - Buscar por gênero')
@@ -44,6 +46,7 @@ class Interface():
     def opcoes_preco(self):
         print()
         print('Escolha um intervalo de preço')
+        print('------------------------------------')
         print('1 - Até R$30,00')
         print('2 - Entre R$30 e R$50')
         print('3 - Entre R$50 e R$100')
