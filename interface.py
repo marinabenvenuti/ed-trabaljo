@@ -60,12 +60,12 @@ class Interface():
         tipo = input(f'Digite o {tipo} do livro: ')
         return tipo
     
-    def print_livro(self, livro):
+    def print_livro(self, nome, autor, genero, preco):
         print()
-        print(f'Livro: {livro.nome}')
-        print(f'Autor: {livro.autor}')
-        print(f'Gênero: {livro.genero}')
-        print(f'Preço: {livro.preco}')
+        print(f'Livro: {nome}')
+        print(f'Autor: {autor}')
+        print(f'Gênero: {genero}')
+        print(f'Preço: {preco}')
         print('-------------------------------------')
 
     def print_basico(self, conteudo):

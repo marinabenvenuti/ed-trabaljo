@@ -117,7 +117,7 @@ class ListaInvertida():
                 encontrados = [livro for livro in self.__livros if livro.nome == nome]
                 if encontrados:
                     for livro in encontrados:
-                        self.__interface.print_livro(livro)
+                        self.__interface.print_livro(livro.nome, livro.autor, livro.genero, livro.preco)
                 else:
                     self.__interface.print_basico('Livro não encontrado')
 
@@ -155,7 +155,7 @@ class ListaInvertida():
                     encontrados = [livro for livro in self.__livros if livro.id in result_autor and livro.id in result_genero]
                     if encontrados:
                         for livro in encontrados:
-                            self.__interface.print_livro(livro)
+                            self.__interface.print_livro(livro.nome, livro.autor, livro.genero, livro.preco)
                     else:
                         self.__interface.print_basico('Nenhum livro encontrado com o autor e gênero informado')
 
@@ -170,7 +170,7 @@ class ListaInvertida():
                         for id_a in result_autor:
                             for id_p in result_preco:
                                 if livro.id==id_a and livro.id==id_p:
-                                    self.__interface.print_livro(livro)
+                                    self.__interface.print_livro(livro.nome, livro.autor, livro.genero, livro.preco)
 
             elif opcao_busca == '7':
                 result_genero = self.busca_genero()
@@ -183,7 +183,7 @@ class ListaInvertida():
                         for id_g in result_genero:
                             for id_p in result_preco:
                                 if livro.id==id_g and livro.id==id_p:
-                                    self.__interface.print_livro(livro)
+                                    self.__interface.print_livro(livro.nome, livro.autor, livro.genero, livro.preco)
                     
 
             elif opcao_busca == '0':
@@ -193,7 +193,7 @@ class ListaInvertida():
         for livro in self.__livros:
             for id in result:
                 if livro.id == id:
-                    self.__interface.print_livro(livro)
+                    self.__interface.print_livro(livro.nome, livro.autor, livro.genero, livro.preco)
     
     def busca_autor(self):
         autor = self.__interface.busca_basica('autor')
